@@ -95,16 +95,4 @@ class FeatureContext implements Context, KernelAwareContext
             throw new RuntimeException('Expected integer');
         }
     }
-
-    /**
-     * @Then /^the value of "([^"]*)" will be empty$/
-     * @throws Exception
-     */
-    public function theValueOfWillBeEmpty($arg1)
-    {
-        $param = $this->kernel->getContainer()->getParameter($arg1);
-        if (!empty($param)) {
-            throw new RuntimeException('Expected empty value');
-        }
-    }
 }

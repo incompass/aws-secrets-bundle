@@ -60,7 +60,7 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
             if (isset($this->decodedSecrets[$parts[0]][$parts[1]])) {
                 return (string)$this->decodedSecrets[$parts[0]][$parts[1]];
             } else {
-                return null;
+                throw new RuntimeException(sprintf("Key '%s' not found in secret '%s'.", $parts[1], $parts[0]));
             }
         }
 
