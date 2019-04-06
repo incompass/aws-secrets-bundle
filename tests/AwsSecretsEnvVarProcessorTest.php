@@ -106,7 +106,7 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_runtime_exception_for_invalid_key(): void
+    public function it_throws_a_runtime_exception_for_invalid_key(): void
     {
         $this->provider->get('prefix/db')->willReturn('{"key":"value"}');
 

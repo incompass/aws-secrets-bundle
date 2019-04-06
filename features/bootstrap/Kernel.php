@@ -80,7 +80,6 @@ class Kernel extends BaseKernel
         $c->setParameter('kernel.secret', 'S3CR3T');
         $c->setParameter('aws_secret', '%env(aws:AWS_SECRET)%');
         $c->setParameter('aws_secret_int', '%env(int:aws:AWS_SECRET)%');
-        $c->setParameter('aws_secret_empty', '%env(aws:AWS_SECRET)%');
     }
 
     public function getLogDir()
