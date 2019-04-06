@@ -24,3 +24,14 @@ Feature: AWS Secrets
     """
     And the env var "AWS_SECRET" is set to "test/secret,key"
     Then the value of "aws_secret_int" will be int
+
+  @mockSecretsManagerClient
+  Scenario: AWS Parameter without subkey
+    Given the secrets manager value for "test/secret" is:
+    """
+    {
+      "key": "val"
+    }
+    """
+    And the env var "AWS_SECRET" is set to "test/secret,subkey"
+    Then the value of "aws_secret_empty" will be empty
