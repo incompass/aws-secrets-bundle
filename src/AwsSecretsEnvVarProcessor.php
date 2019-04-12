@@ -58,7 +58,7 @@ class AwsSecretsEnvVarProcessor implements EnvVarProcessorInterface
                 $this->decodedSecrets[$parts[0]] = json_decode($result, true);
             }
 
-            return (string)$this->decodedSecrets[$parts[0]][$parts[1]];
+            return urlencode((string)$this->decodedSecrets[$parts[0]][$parts[1]]);
         }
 
         return $result;
