@@ -102,4 +102,29 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
         $this->assertEquals(1, $callCount);
         $this->assertEquals('value', $value);
     }
+
+    /**
+     * @test
+     */
+    public function it_throws_a_runtime_exception_for_invalid_key(): void
+    {
+        $this->provider->get('prefix/db')->willReturn('{"key":"value"}');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage("Key 'yek' not found in secret 'prefix/db'");
+
+        $callCount = 0;
+        $value = $this->processor->getEnv(
+            'aws',
+            'AWS_SECRET',
+            function (string $name) use (&$callCount) {
+                $callCount++;
+                if ($callCount === 1) {
+                    return 'prefix/db,yek';
+                }
+
+                return null;
+            }
+        );
+    }
 }
